@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Form, Icon, Input, Button } from 'antd';
-import {reqLogin} from '../../api/index'
+import { Form, Icon, Input, Button,message } from 'antd';
+import {reqLogin} from '../../api'
+import memoryUtils from '../../utils/memoryUtils'
+import { saveUser } from '../../utils/storageUtils'
 import "./login.less"
 import logo from './images/logo.png';
 
@@ -21,6 +23,7 @@ const Item = Form.Item
     //对表单的所有字段进行统一验证
     this.props.form.validateFields(async (err,values)=>{
     if(!err){//校验成功
+      console.log(values);
      // alert(`发送登录的Ajax请求，username=${values.username},password=${values.password}`)
      const  result=await reqLogin(values)
        if(result.status===0){
@@ -28,12 +31,15 @@ const Item = Form.Item
          //得到user
          const user=result.data
          //保存user 保存到local
-         localStorage.setItem('')
+         //localStorage.setItem('user_key',JSON.stringify('user'))
+         saveUser(user)
          //保存到内存
-         
-
-
-
+         memoryUtils.user=user
+       //登录请求成功后跳转到admin
+       this.props.history.replace('/admin')
+       }else{
+         //登录请求失败
+         message.error(result.msg)
        }
     }
     })

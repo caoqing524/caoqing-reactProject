@@ -12,7 +12,7 @@ const qs=require('qs')
 axios.interceptors.request.use(config=>{
 //1.把post请求的data对象数据转换为urlencode格式的字符串数据 (用到qs)
 //判断请求的方式
-if(config.method.toUpperCase==='POST'&&config.data instanceof Object){
+if(config.method.toUpperCase()==='POST'&&config.data instanceof Object){
       config.data=qs.stringify(config.data)
 }
 return config
