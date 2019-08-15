@@ -29,7 +29,7 @@ class Login extends Component {
       if (!err) {
         // try {} catch (error) {}
         // alert(`发登陆的ajax请求, username=${username}, password=${password}`)
-        const result = await reqLogin(username, password)
+        const result = await reqLogin({username, password})
         // 登陆成功
         if (result.status===0) {
           // 将user信息保存到local
@@ -79,8 +79,8 @@ class Login extends Component {
   render() {
 
     // 读取保存的user, 如果存在, 直接跳转到管理界面
-    // const user = JSON.parse(localStorage.getItem('user_key') || '{}')
     const user = memoryUtils.user
+    // const user = JSON.parse(localStorage.getItem('user_key') || '{}')
     if (user._id) {
       return <Redirect to="/" /> // 自动跳转到指定的路由路径
     }
@@ -162,6 +162,7 @@ class Login extends Component {
   函数接收一个组件, 返回一个新的组件
   Form.create()返回的就是一个高阶组件
 */
+//Form.create()(Login) 包裹完会自动给Login传入一个强大的form对象，该对象里有很多的方法
 
 const WrapperForm = Form.create()(Login)
 

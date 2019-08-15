@@ -18,7 +18,7 @@ import {message} from 'antd'
  //()=>({name:'tom'}) 如果返回的是对象的话，外面加小括号
 
 
-//2.添加用户
+//2.添加用户的请求接口函数
 export const reqAddUser=(user)=>ajax({
     url:BASE+'/manage/user/add',
     method:'POST',
@@ -26,7 +26,7 @@ export const reqAddUser=(user)=>ajax({
 })
 
 /* 
-获取天气信息(jsonp) 
+3.获取天气信息(jsonp) 的请求接口函数
 */
 export const reqWeather = (city) => {
     const url = `http://api.map.baidu.com/telematics/v3/weather?location=${city}&output=json&ak=3p49MVra6urFRGOT9s8UBWr2`
@@ -50,3 +50,24 @@ export const reqWeather = (city) => {
     })
 
 }
+
+//4.获取所有商品分类的列表的请求接口函数
+//方式一 export const reqCategorys=()=>ajax.get('/manage/category/list')
+ //方式二
+export  const reqCategorys=()=>ajax({
+     method:'GET',
+     url: '/manage/category/list'
+ })
+//方式三 export const reqCategorys = () => ajax(BASE + '/manage/category/list')
+
+
+//5.添加分类的请求接口函数
+export const reqAddCategory = (categoryName) => ajax.post('/manage/category/add', {
+    categoryName
+})
+
+//6.修改分类的请求接口函数
+export const reqUpdateCategory = (categoryId,categoryName) => ajax.post('/manage/category/update', {
+   categoryId, categoryName
+})
+
