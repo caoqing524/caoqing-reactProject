@@ -52,6 +52,7 @@ export const reqWeather = (city) => {
 }
 
 //4.获取所有商品分类的列表的请求接口函数
+//前台分页（一次获取所有数据，翻页时不需要再发请求，不用指定请求参数，得到的响应数据是所有数据的数组）
 //方式一 export const reqCategorys=()=>ajax.get('/manage/category/list')
  //方式二
 export  const reqCategorys=()=>ajax({
@@ -71,3 +72,13 @@ export const reqUpdateCategory = (categoryId,categoryName) => ajax.post('/manage
    categoryId, categoryName
 })
 
+//7.获取商品分页列表的请求接口函数（后台分页，每次只获取当前页的数据，翻页时要发请求）
+//方式一
+export const reqProducts = (pageNum, pageSize) => ajax.get('/manage/category/list', {
+    params: {
+        pageNum,
+        pageSize
+    }
+})
+//方式二
+//ajax({url: '/manage/category/list',params:{pageNum, pageSize}})

@@ -65,7 +65,7 @@ initColumns=()=>{
 
   ]
 }
-
+//组件将要挂载
 componentWillMount() {
   this.initColumns()
 }
